@@ -18,12 +18,12 @@ function gotoMMedium() {
 
 
 function gotoHard() {
-    console.log("Hard");
+    window.location = "hard.html"
 }
 
 
 function gotoVeryHard() {
-    console.log("Very Hard");
+    window.location = "veryHard.html"
 }
 
 
