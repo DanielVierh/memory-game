@@ -121,3 +121,11 @@ function restart() {
 function backToManue() {
     window.location = "index.html"
 }
+
+// function sleep(ms){
+//     return new Promise((resolve, reject) => {
+//         setTimeout(() => {
+//             resolve(ms);
+//         }, ms);
+//     })
+// }
