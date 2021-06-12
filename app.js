@@ -13,7 +13,7 @@ function gotoEasy() {
 
 
 function gotoMMedium() {
-    console.log("Medium");
+    window.location = "medium.html"
 }
 
 
