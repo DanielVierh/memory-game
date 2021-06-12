@@ -7,6 +7,7 @@ body{
     padding: 0;
     background-color: rgba(0, 142, 142);
     justify-content: center;
+    background-image: url("Assets/backgroundMemory.jpg");
 }
 
 .mainContainer{
@@ -23,7 +24,8 @@ body{
 }
 
 h1{
-    color: rgb(147, 221, 0);
+    color: rgb(16, 80, 122);
+    text-shadow: 5px 5px 15px rgb(255, 238, 0);
 }
 
 .buttonCard{
@@ -71,7 +73,9 @@ h1{
         width: 20%;
         height: 60px;
         margin: 5px;
-        font-size: 25px;
+        /* Alter Wert */
+        /* font-size: 25px; */
+        font-size: 40px;
         border-radius: 12px;
         box-shadow: 5px 5px 15px black;
         border: 3px dotted rgb(14, 142, 201);

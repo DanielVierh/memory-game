@@ -9,6 +9,7 @@ var card1 = "";
 var card2 = "";
 var emoji1 = "";
 var emoji2 = "";
+var points = 5;
 
 class Card{
     constructor(cardID, emoji) {
@@ -77,7 +78,8 @@ function searchCard(cardID) {
 // Match checken
 function checkMatch() {
     if (emoji1 == emoji2) {
-        document.getElementById("output").innerHTML = "Super 😃";
+        points += 5;
+        document.getElementById("output").innerHTML = points + " Punkte (+5 Punkte)";
         document.getElementById(card1).disabled = true;
         document.getElementById(card2).disabled = true;
         totalDiscovered ++
@@ -87,10 +89,14 @@ function checkMatch() {
         emoji1 = "";
         emoji2 = "";
         if(totalDiscovered == valuePairs) {
-            document.getElementById("output").innerHTML = "Gewonnen 🥳🥳🥳";
+            document.getElementById("output").innerHTML = "Gewonnen 🥳🥳🥳 mit " + points + " Punkten";
         }
     }else {
-        document.getElementById("output").innerHTML = "Schade 🙁";
+        points -= 2;
+        if(points < 0) {
+            points = 0;
+        }
+        document.getElementById("output").innerHTML = points + " Punkte (-2 Punkte)";
     }
 }
 
