@@ -75,9 +75,10 @@ h1{
         margin: 5px;
         /* Alter Wert */
         /* font-size: 25px; */
-        font-size: 40px;
+        font-size: 35px;
         border-radius: 12px;
         box-shadow: 5px 5px 15px black;
         border: 3px dotted rgb(14, 142, 201);
+
     }
 }
