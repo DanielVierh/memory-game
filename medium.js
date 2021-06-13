@@ -53,12 +53,17 @@ function toggleCard(id) {
         emoji1 = currentEmoji;
         document.getElementById(id).innerText = currentEmoji;
     }else if(toggleAmount < 3) {
-        card2 = id;
-        // Hole Wert aus Array Cards
-        let currentEmoji = searchCard(id);
-        document.getElementById(id).innerText = currentEmoji;
-        emoji2 = currentEmoji;
-        checkMatch();
+        if(card1 != id) {
+            card2 = id;
+            // Hole Wert aus Array Cards
+            let currentEmoji = searchCard(id);
+            document.getElementById(id).innerText = currentEmoji;
+            emoji2 = currentEmoji;
+            checkMatch();
+        }else{
+            toggleAmount --;
+        }
+
     }else{
         // Cover Cards
         coverCards();
@@ -94,8 +99,7 @@ function checkMatch() {
             points += 6;
             document.getElementById("output").innerHTML = points + " Punkte (+5 Punkte 🤩 +5 Super Combo)";
         }
-
-
+        // Disabled etc
         document.getElementById(card1).disabled = true;
         document.getElementById(card2).disabled = true;
         totalDiscovered ++
@@ -138,11 +142,3 @@ function restart() {
 function backToManue() {
     window.location = "index.html"
 }
-
-// function sleep(ms){
-//     return new Promise((resolve, reject) => {
-//         setTimeout(() => {
-//             resolve(ms);
-//         }, ms);
-//     })
-// }

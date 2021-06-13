@@ -9,6 +9,8 @@ var card1 = "";
 var card2 = "";
 var emoji1 = "";
 var emoji2 = "";
+var points = 5;
+var combo = 0;
 
 class Card{
     constructor(cardID, emoji) {
@@ -26,6 +28,7 @@ function assignValues() {
         let crdID = "card" + i;
         let emj = emojiArray[i];
         cards.push(new Card(crdID,emj));
+        console.log("Karte: ", crdID + " Emoji:", emj);
     }
 }
 
@@ -50,12 +53,17 @@ function toggleCard(id) {
         emoji1 = currentEmoji;
         document.getElementById(id).innerText = currentEmoji;
     }else if(toggleAmount < 3) {
-        card2 = id;
-        // Hole Wert aus Array Cards
-        let currentEmoji = searchCard(id);
-        document.getElementById(id).innerText = currentEmoji;
-        emoji2 = currentEmoji;
-        checkMatch();
+        if(card1 != id) {
+            card2 = id;
+            // Hole Wert aus Array Cards
+            let currentEmoji = searchCard(id);
+            document.getElementById(id).innerText = currentEmoji;
+            emoji2 = currentEmoji;
+            checkMatch();
+        }else{
+            toggleAmount --;
+        }
+
     }else{
         // Cover Cards
         coverCards();
@@ -77,7 +85,21 @@ function searchCard(cardID) {
 // Match checken
 function checkMatch() {
     if (emoji1 == emoji2) {
-        document.getElementById("output").innerHTML = "Super 😃";
+        points += 5;
+        combo ++;
+        document.getElementById("output").innerHTML = points + " Punkte (+5 Punkte)";
+        // Combo
+        if(combo == 2) {
+            points += 2;
+            document.getElementById("output").innerHTML = points + " Punkte (+5 Punkte 🤩 +2 Zweifach Combo)";
+        }else if(combo == 3) {
+            points += 4;
+            document.getElementById("output").innerHTML = points + " Punkte (+5 Punkte 🤩 +3 Dreifach Combo)";
+        }else if (combo > 3) {
+            points += 6;
+            document.getElementById("output").innerHTML = points + " Punkte (+5 Punkte 🤩 +5 Super Combo)";
+        }
+        // Disabled etc
         document.getElementById(card1).disabled = true;
         document.getElementById(card2).disabled = true;
         totalDiscovered ++
@@ -87,17 +109,22 @@ function checkMatch() {
         emoji1 = "";
         emoji2 = "";
         if(totalDiscovered == valuePairs) {
-            document.getElementById("output").innerHTML = "Gewonnen 🥳🥳🥳";
+            document.getElementById("output").innerHTML = "Gewonnen 🥳🥳🥳 mit " + points + " Punkten";
         }
     }else {
-        document.getElementById("output").innerHTML = "Schade 🙁";
+        points -= 2;
+        if(points < 0) {
+            points = 0;
+        }
+        document.getElementById("output").innerHTML = points + " Punkte (-2 Punkte)";
+        combo = 0;
     }
 }
 
 // Verdecke Karten
 function coverCards() {
-    document.getElementById(card1).innerText = "?";
-    document.getElementById(card2).innerText = "?";
+    document.getElementById(card1).innerText = "♠️";
+    document.getElementById(card2).innerText = "♠️";
     card1 = "";
     card2 = "";
     emoji1 = "";

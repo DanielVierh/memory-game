@@ -28,5 +28,5 @@ function gotoVeryHard() {
 
 
 function gotoSettings() {
-
+    window.location = "settings.html"
 }
