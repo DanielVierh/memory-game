@@ -29,7 +29,7 @@ function chooseTheme4() {
 
 function colorizeButton(btn){
     for (var i = 1; i < 5 ; i++) {
-        document.getElementById("btn" + i).style.backgroundColor = "white";
+        document.getElementById("btn" + i).style.backgroundColor = "rgba(0, 0, 0, 0.582)";
     }
     document.getElementById(btn).style.backgroundColor = "green";
 }
