@@ -1,8 +1,8 @@
 
 
-var emojiArray = ["🐢","🐠","🐳","🐙","🐢","🐠","🐳","🐙","🦈","🦈","🐬","🐬","🐚","🐚","🐡","🐡"];
+var emojiArray = [];
 var toggleAmount = 0;
-const valuePairs = 8;
+var valuePairs = 8;
 var totalDiscovered = 0;
 var cards = [];
 var card1 = "";
@@ -11,6 +11,70 @@ var emoji1 = "";
 var emoji2 = "";
 var points = 5;
 var combo = 0;
+var degreeOfDifficulty = "";
+var emojiPack = "";
+let emojiPack1 = ["🐠","🐠","🐙","🐙","🐢","🐢","🐳","🐳","🦈","🦈","🐬","🐬","🐚","🐚","🐡","🐡","🐊","🐊","🐋","🐋","🐟","🐟","🐸","🐸"];
+let emojiPack2 = ["😃","😃","😅","😅","😍","😍","😴","😴","😷","😷","😎","😎","🤓","🤓","😱","😱","👿","👿","👻","👻","👽","👽","🤖","🤖"];
+let emojiPack3 = ["🦀","🦀","🦂","🦂","☄️","☄️","🌋","🌋","🐢","🐢","🐊","🐊","🦎","🦎","🐍","🐍","🐲","🐲","🐉","🐉","🦕","🦕","🦖","🦖"];
+let emojiPack4 = ["🍳","🍳","🍕","🍕","🍟","🍟","🍔","🍔","🍗","🍗","🥗","🥗","🥥","🥥","🍓","🍓","🍎","🍎","🥦","🥦","🍋","🍋","🍉","🍉"];
+var arrayLength = 0;
+
+// Gespeicherte Werte laden
+function getData() {
+    // Theme Package
+    if(localStorage.getItem('storedEmojiPack') === null) {
+        console.log("Kein  Emojipack");
+        emojiPack = "pack1"
+    }else {
+        
+        emojiPack = JSON.parse(localStorage.getItem("storedEmojiPack"));
+        console.log("Pack wird geladen", emojiPack);
+    }
+
+    //Mode
+    if(localStorage.getItem('storedMode') === null) {
+        console.log("Kein  Mode");
+        degreeOfDifficulty = "medium"
+    }else {
+        
+        degreeOfDifficulty = JSON.parse(localStorage.getItem("storedMode"));
+        console.log("Mode wird geladen", degreeOfDifficulty);
+    }
+    // Highscore
+}
+
+
+
+getData();
+
+function assignPackage() {
+    if(emojiPack == "pack1") {
+        emojiArray = emojiPack1;
+    }else if(emojiPack == "pack2") {
+        emojiArray = emojiPack2;
+    }else if(emojiPack == "pack3") {
+        emojiArray = emojiPack3;
+    }else if(emojiPack == "pack4") {
+        emojiArray = emojiPack4;
+    }
+    assignArrayLength();
+    assignValues();
+}
+
+function assignArrayLength() {
+    if(degreeOfDifficulty == "veryEasy") {
+        arrayLength = 8;
+    }else if(degreeOfDifficulty == "easy") {
+        arrayLength = 12;
+    }else if(degreeOfDifficulty == "medium") {
+        arrayLength = 16;
+    }else if(degreeOfDifficulty == "hard") {
+        arrayLength = 24;
+    }else if(degreeOfDifficulty == "veryHard") {
+        arrayLength = 24;
+    }
+    valuePairs = arrayLength / 2;
+}
 
 class Card{
     constructor(cardID, emoji) {
@@ -19,12 +83,12 @@ class Card{
     }
 }
 
-assignValues();
+assignPackage();
 
 // Den Karten einen Wert zuweisen
 function assignValues() {
     shuffle(emojiArray);
-    for (var i = 0; i < emojiArray.length; i++) {
+    for (var i = 0; i < arrayLength; i++) {
         let crdID = "card" + i;
         let emj = emojiArray[i];
         cards.push(new Card(crdID,emj));
@@ -35,7 +99,7 @@ function assignValues() {
 
 //Shuffle
 function shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
+    for (let i = arrayLength - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [a[i], a[j]] = [a[j], a[i]];
     }
@@ -63,13 +127,10 @@ function toggleCard(id) {
         }else{
             toggleAmount --;
         }
-
     }else{
         // Cover Cards
         coverCards();
     }
-
-
 }
 
 // Sucht Emoji und weist diese zu
