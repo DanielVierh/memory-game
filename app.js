@@ -27,8 +27,15 @@ function chooseTheme4() {
     
 }
 
+function chooseTheme5() {
+    save_ThemePackage("pack5");
+    colorizeButton("btn5");
+    alert("Emoji-Theme wurde gespeichert");
+    
+}
+
 function colorizeButton(btn){
-    for (var i = 1; i < 5 ; i++) {
+    for (var i = 1; i < 6 ; i++) {
         document.getElementById("btn" + i).style.backgroundColor = "rgba(0, 0, 0, 0.582)";
     }
     document.getElementById(btn).style.backgroundColor = "green";
