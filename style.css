@@ -40,10 +40,11 @@ h1{
 }
 
 .buttonMode{
-    width: 300px;
-    height: 90px;
+    width: 280px;
+    height: 70px;
     margin: 10px 20px 10px 20px;
     font-size: 30px;
+    font-weight: bold;
     border-radius: 12px;
     box-shadow: 5px 5px 15px black;
     color: aqua;
@@ -85,4 +86,11 @@ h1{
         border: 3px solid rgba(13, 107, 150, 0.699);
         padding: 0;
     }
+}
+
+.timerLabel{
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: yellow;
 }

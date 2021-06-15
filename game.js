@@ -19,6 +19,10 @@ let emojiPack3 = ["🦀","🦀","🦂","🦂","☄️","☄️","🌋","🌋","�
 let emojiPack4 = ["🍳","🍳","🍕","🍕","🍟","🍟","🍔","🍔","🍗","🍗","🥗","🥗","🥥","🥥","🍓","🍓","🍎","🍎","🥦","🥦","🍋","🍋","🍉","🍉"];
 let emojiPack5 = ["🚗","🚗","🛵","🛵","🚆","🚆","⛵️","⛵️","🚢","🚢","🚁","🚁","🚜","🚜","🚓","🚓","🚛","🚛","🚒","🚒","🚑","🚑","🚕","🚕",]
 var arrayLength = 0;
+var countdown = 100;
+var gameStarted = false;
+var sieg = false;
+
 // 
 // Gespeicherte Werte laden
 function getData() {
@@ -75,6 +79,7 @@ function assignArrayLength() {
         arrayLength = 24;
     }else if(degreeOfDifficulty == "veryHard") {
         arrayLength = 24;
+        document.getElementById("countdown").innerHTML = countdown + " Sekunden";
     }
     valuePairs = arrayLength / 2;
 }
@@ -112,6 +117,10 @@ function shuffle(a) {
 
 // Aufdecken
 function toggleCard(id) {
+    if (gameStarted == false) {
+        runCountdown();
+        gameStarted = true;
+    }
     toggleAmount ++;
     if(toggleAmount < 2) {
         card1 = id;
@@ -173,6 +182,7 @@ function checkMatch() {
         emoji1 = "";
         emoji2 = "";
         if(totalDiscovered == valuePairs) {
+            sieg = true;
             document.getElementById("output").innerHTML = "Gewonnen 🥳🥳🥳 mit " + points + " Punkten";
         }
     }else {
@@ -205,4 +215,32 @@ function restart() {
 // Zurück zum Menü
 function backToManue() {
     window.location = "index.html"
+}
+
+
+// Bei Sehr schwer Countdown
+function runCountdown() {
+    
+        setInterval(() => {
+            if (countdown > 0){
+                if(sieg == false){
+                    countdown --;
+                    document.getElementById("countdown").innerHTML = countdown + " Sekunden";
+                }else{
+                    let timeDuration = 100 - countdown;
+                    document.getElementById("countdown").innerHTML = countdown + " Sekunden (" + timeDuration + " Sek. benötigt)";
+                }
+
+            }else {
+                document.getElementById("countdown").innerHTML = "Game Over";
+                buttonSperren();
+            }
+        }, 1000); 
+}
+
+
+function buttonSperren() {
+    for (var i = 0; i < arrayLength; i++) {
+        document.getElementById("card" + i).disabled = true;
+    }
 }
