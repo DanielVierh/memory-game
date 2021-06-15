@@ -79,6 +79,7 @@ function assignArrayLength() {
         arrayLength = 24;
     }else if(degreeOfDifficulty == "veryHard") {
         arrayLength = 24;
+        points = 20;
         document.getElementById("countdown").innerHTML = countdown + " Sekunden";
     }
     valuePairs = arrayLength / 2;
@@ -117,7 +118,7 @@ function shuffle(a) {
 
 // Aufdecken
 function toggleCard(id) {
-    if (gameStarted == false) {
+    if (gameStarted == false && degreeOfDifficulty == "veryHard") {
         runCountdown();
         gameStarted = true;
     }
@@ -189,6 +190,9 @@ function checkMatch() {
         points -= 2;
         if(points < 0) {
             points = 0;
+            if(degreeOfDifficulty == "veryHard") {
+                countdown = 0;
+            }
         }
         document.getElementById("output").innerHTML = points + " Punkte (-2 Punkte)";
         combo = 0;
