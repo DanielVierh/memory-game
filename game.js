@@ -23,6 +23,7 @@ var countdown = 100;
 var gameStarted = false;
 var sieg = false;
 
+
 // 
 // Gespeicherte Werte laden
 function getData() {
@@ -136,13 +137,14 @@ function toggleCard(id) {
             let currentEmoji = searchCard(id);
             document.getElementById(id).innerText = currentEmoji;
             emoji2 = currentEmoji;
+
             checkMatch();
         }else{
             toggleAmount --;
         }
     }else{
         // Cover Cards
-        coverCards();
+        //coverCards();
     }
 }
 
@@ -196,7 +198,14 @@ function checkMatch() {
         }
         document.getElementById("output").innerHTML = points + " Punkte (-2 Punkte)";
         combo = 0;
+        timeframe();
     }
+}
+
+function timeframe() {
+    setTimeout(() => {
+        coverCards();
+    }, 2000);
 }
 
 // Verdecke Karten
