@@ -22,7 +22,8 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
-
+    display: grid;
+    place-items: center;
 }
 
 h1{
@@ -44,7 +45,7 @@ h1{
 
 .buttonMode{
     width: 280px;
-    height: 80px;
+    height: 60px;
     margin: 10px 20px 10px 20px;
     font-size: 30px;
     font-weight: bold;
@@ -52,6 +53,7 @@ h1{
     box-shadow: 5px 5px 15px black;
     color: aqua;
     background-color: rgba(0, 0, 0, 0.582);
+
 }
 
 .button{
