@@ -1,5 +1,3 @@
-
-
 var emojiArray = [];
 var toggleAmount = 0;
 var valuePairs = 8;
@@ -24,7 +22,6 @@ var gameStarted = false;
 var sieg = false;
 
 
-// 
 // Gespeicherte Werte laden
 function getData() {
     // Theme Package
