@@ -4,7 +4,8 @@ body{
     padding: 0;
     background-color: rgba(0, 142, 142);
     justify-content: center;
-    background-image: url("Assets/backgroundMemory.jpg");
+    /* background-image: url("Assets/backgroundMemory.jpg"); */
+    background: linear-gradient(to right, rgb(86, 172, 6), rgb(23, 211, 245));
     background-repeat: no-repeat;
     background-size: cover;
 }
