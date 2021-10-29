@@ -1,37 +1,27 @@
 
 function chooseTheme1() {
     save_ThemePackage("pack1");
-    colorizeButton("btn1");
-    alert("Emoji-Theme wurde gespeichert");
-    
+    colorizeButton("btn1");    
 }
 
 function chooseTheme2() {
     save_ThemePackage("pack2");
-    colorizeButton("btn2");
-    alert("Emoji-Theme wurde gespeichert");
-    
+    colorizeButton("btn2");    
 }
 
 function chooseTheme3() {
     save_ThemePackage("pack3");
-    colorizeButton("btn3");
-    alert("Emoji-Theme wurde gespeichert");
-    
+    colorizeButton("btn3");    
 }
 
 function chooseTheme4() {
     save_ThemePackage("pack4");
-    colorizeButton("btn4");
-    alert("Emoji-Theme wurde gespeichert");
-    
+    colorizeButton("btn4");    
 }
 
 function chooseTheme5() {
     save_ThemePackage("pack5");
-    colorizeButton("btn5");
-    alert("Emoji-Theme wurde gespeichert");
-    
+    colorizeButton("btn5");    
 }
 
 function colorizeButton(btn){

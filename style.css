@@ -1,11 +1,12 @@
+html{
+    /* background: linear-gradient(to right,#2dc6a6,#54f986); */
+    background: linear-gradient(to right,#3178fe,#835b53);
+}
 
 body{
     margin: 0;
     padding: 0;
-    background-color: rgba(0, 142, 142);
     justify-content: center;
-    /* background-image: url("Assets/backgroundMemory.jpg"); */
-    background: linear-gradient(to right, rgb(86, 172, 6), rgb(23, 211, 245));
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -29,7 +30,7 @@ body{
 
 h1{
     color: rgb(16, 80, 122);
-    text-shadow: 5px 5px 15px rgb(255, 238, 0);
+    text-shadow: 5px 5px 15px rgb(245, 240, 179);
 }
 
 .buttonCard{
@@ -66,6 +67,7 @@ h1{
     color: black;
     font-weight: bold;
     font-size: 16px;
+    box-shadow: 0 6px 12px black;
 }
 
 
@@ -102,7 +104,6 @@ h1{
 }
 
 
-
 .themeContainer{
     display: flex;
     overflow-y: auto;
@@ -116,4 +117,9 @@ h1{
     font-size: 30px;
     border-radius: 12px;
     margin: 15px;
+}
+
+#output{
+    background-color: rgb(29, 70, 104);
+    border-radius: 25px;
 }
