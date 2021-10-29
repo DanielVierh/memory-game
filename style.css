@@ -1,11 +1,11 @@
 html{
-    /* background: linear-gradient(to right,#2dc6a6,#54f986); */
     background: linear-gradient(to right,#3178fe,#835b53);
 }
 
 body{
     margin: 0;
     padding: 0;
+    background: linear-gradient(to right,#3178fe,#835b53);
     justify-content: center;
     background-repeat: no-repeat;
     background-size: cover;
