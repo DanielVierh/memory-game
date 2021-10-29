@@ -78,9 +78,6 @@ function checkScore() {
     let foundScore = false;
     let oldCountdown = 0;
 
-    const oldSre = new Highscore('Mr.Feffehausen von Anhalt', 'veryEasy', 10);
-    highscore.push(oldSre);
-
     for(let i = 0; i < highscore.length; i++) {
         if(highscore[i].points < points && highscore[i].level === degreeOfDifficulty) {
             foundScore = true;
