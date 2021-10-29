@@ -1,25 +1,28 @@
-var emojiArray = [];
-var toggleAmount = 0;
-var valuePairs = 8;
-var totalDiscovered = 0;
-var cards = [];
-var card1 = "";
-var card2 = "";
-var emoji1 = "";
-var emoji2 = "";
-var points = 5;
-var combo = 0;
-var degreeOfDifficulty = "";
-var emojiPack = "";
+let emojiArray = [];
+let toggleAmount = 0;
+let valuePairs = 8;
+let totalDiscovered = 0;
+let cards = [];
+let card1 = "";
+let card2 = "";
+let emoji1 = "";
+let emoji2 = "";
+let points = 5;
+let combo = 0;
+let degreeOfDifficulty = "";
+let emojiPack = "";
 let emojiPack1 = ["🐠","🐠","🐙","🐙","🐢","🐢","🐳","🐳","🦈","🦈","🐬","🐬","🐚","🐚","🐡","🐡","🐊","🐊","🐋","🐋","🐟","🐟","🐸","🐸"];
 let emojiPack2 = ["😃","😃","😅","😅","😍","😍","😴","😴","😷","😷","😎","😎","🤓","🤓","😱","😱","👿","👿","👻","👻","👽","👽","🤖","🤖"];
 let emojiPack3 = ["🦀","🦀","🦂","🦂","☄️","☄️","🌋","🌋","🐢","🐢","🐊","🐊","🦎","🦎","🐍","🐍","🐲","🐲","🐉","🐉","🦕","🦕","🦖","🦖"];
 let emojiPack4 = ["🍳","🍳","🍕","🍕","🍟","🍟","🍔","🍔","🍗","🍗","🥗","🥗","🥥","🥥","🍓","🍓","🍎","🍎","🥦","🥦","🍋","🍋","🍉","🍉"];
 let emojiPack5 = ["🚗","🚗","🛵","🛵","🚆","🚆","⛵️","⛵️","🚢","🚢","🚁","🚁","🚜","🚜","🚓","🚓","🚛","🚛","🚒","🚒","🚑","🚑","🚕","🚕",]
-var arrayLength = 0;
-var countdown = 100;
-var gameStarted = false;
-var sieg = false;
+let arrayLength = 0;
+let countdown = 100;
+let gameStarted = false;
+let sieg = false;
+let highscore = [];
+let seconds = 0;
+let averageTime = 100;
 
 
 // Gespeicherte Werte laden
@@ -44,6 +47,56 @@ function getData() {
         console.log("Mode wird geladen", degreeOfDifficulty);
     }
     // Highscore
+    if(localStorage.getItem('storedHighscore') != null) {
+        highscore = JSON.parse(localStorage.getItem("storedHighscore"));
+    }else{
+        console.log("Noch kein Highscore Array");
+        const veryEasyScore = new Highscore('','veryEasy', 0);
+        const easyScore = new Highscore('','easy', 0);
+        const mediumScore = new Highscore('','medium', 0);
+        const hardScore = new Highscore('','hard', 0);
+        const veryHardScore = new Highscore('','veryHard', 0);
+        highscore.push(veryEasyScore);
+        highscore.push(easyScore);
+        highscore.push(mediumScore);
+        highscore.push(hardScore);
+        highscore.push(veryHardScore);
+        localStorage.setItem("storedHighscore", JSON.stringify(highscore));
+        console.log(highscore);
+    }
+}
+
+class Highscore {
+    constructor(name, level, points) {
+        this.name = name;
+        this.level = level;
+        this.points = points;
+    }
+}
+
+function checkScore() {
+    let foundScore = false;
+    let oldCountdown = 0;
+
+    const oldSre = new Highscore('Mr.Feffehausen von Anhalt', 'veryEasy', 10);
+    highscore.push(oldSre);
+
+    for(let i = 0; i < highscore.length; i++) {
+        if(highscore[i].points < points && highscore[i].level === degreeOfDifficulty) {
+            foundScore = true;
+            document.getElementById("output").innerHTML = `Gewonnen und den Highscore geknackt 🥇🎈 Du hast: ${seconds} Sekunden benötigt und ${points} Punkte erhalten`;
+            const newHighscoreName = window.prompt(`Du hast den Highscore "${highscore[i].name}: ${highscore[i].points}" genkackt. Trage Deinen Namen ein:`);
+            highscore[i].name = newHighscoreName;
+            highscore[i].level = degreeOfDifficulty;
+            highscore[i].points = points;
+            console.log(highscore);
+            localStorage.setItem("storedHighscore", JSON.stringify(highscore));
+            return            
+        }
+    }
+    if(foundScore === false) {
+        document.getElementById("output").innerHTML = `Gewonnen 🎈 Du hast: ${seconds} Sekunden benötigt. Du hast ${points} Punkte erhalten`;     
+    }
 }
 
 
@@ -69,14 +122,19 @@ function assignPackage() {
 function assignArrayLength() {
     if(degreeOfDifficulty == "veryEasy") {
         arrayLength = 8;
+        averageTime = 20;
     }else if(degreeOfDifficulty == "easy") {
         arrayLength = 12;
+        averageTime = 35;
     }else if(degreeOfDifficulty == "medium") {
         arrayLength = 16;
+        averageTime = 60;
     }else if(degreeOfDifficulty == "hard") {
         arrayLength = 24;
+        averageTime = 100;
     }else if(degreeOfDifficulty == "veryHard") {
         arrayLength = 24;
+        averageTime = 100;
         points = 20;
         document.getElementById("countdown").innerHTML = countdown + " Sekunden";
     }
@@ -95,7 +153,7 @@ assignPackage();
 // Den Karten einen Wert zuweisen
 function assignValues() {
     shuffle(emojiArray);
-    for (var i = 0; i < arrayLength; i++) {
+    for (let i = 0; i < arrayLength; i++) {
         let crdID = "card" + i;
         let emj = emojiArray[i];
         cards.push(new Card(crdID,emj));
@@ -118,6 +176,10 @@ function shuffle(a) {
 function toggleCard(id) {
     if (gameStarted == false && degreeOfDifficulty == "veryHard") {
         runCountdown();
+        countTime();
+        gameStarted = true;
+    }else if(gameStarted == false) {
+        countTime();
         gameStarted = true;
     }
     toggleAmount ++;
@@ -147,7 +209,7 @@ function toggleCard(id) {
 
 // Sucht Emoji und weist diese zu
 function searchCard(cardID) {
-    for(var i = 0; i < cards.length; i++) {
+    for(let i = 0; i < cards.length; i++) {
         if (cards[i].cardID == cardID) {
             return cards[i].emoji;
         }
@@ -183,15 +245,17 @@ function checkMatch() {
         emoji2 = "";
         if(totalDiscovered == valuePairs) {
             sieg = true;
-            document.getElementById("output").innerHTML = "Gewonnen 🥳🥳🥳 mit " + points + " Punkten";
+            const additionalPoints = averageTime - seconds;
+            points += additionalPoints;
+            checkScore();
         }
     }else {
         points -= 2;
         if(points < 0) {
             points = 0;
-            if(degreeOfDifficulty == "veryHard") {
+            //if(degreeOfDifficulty == "veryHard") {
                 countdown = 0;
-            }
+            // }
         }
         document.getElementById("output").innerHTML = points + " Punkte (-2 Punkte)";
         combo = 0;
@@ -248,9 +312,16 @@ function runCountdown() {
         }, 1000); 
 }
 
-
 function buttonSperren() {
-    for (var i = 0; i < arrayLength; i++) {
+    for (let i = 0; i < arrayLength; i++) {
         document.getElementById("card" + i).disabled = true;
     }
+}
+
+function countTime() {
+    setInterval(() => {
+        if(sieg == false){
+            seconds++;
+        }
+    }, 1000);
 }
