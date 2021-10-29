@@ -86,3 +86,32 @@ function backToManue() {
     window.location = "index.html"
 }
 
+function showHighscore(){
+    let highscore = [];
+    if(localStorage.getItem('storedHighscore') != null) {
+        highscore = JSON.parse(localStorage.getItem("storedHighscore"));
+    }else{
+        console.log("Noch kein Highscore Array");
+        const veryEasyScore = new Highscore('Neu','veryEasy', 0);
+        const easyScore = new Highscore('Neu','easy', 0);
+        const mediumScore = new Highscore('Neu','medium', 0);
+        const hardScore = new Highscore('Neu','hard', 0);
+        const veryHardScore = new Highscore('Neu','veryHard', 0);
+        highscore.push(veryEasyScore);
+        highscore.push(easyScore);
+        highscore.push(mediumScore);
+        highscore.push(hardScore);
+        highscore.push(veryHardScore);
+        localStorage.setItem("storedHighscore", JSON.stringify(highscore));
+    }
+    console.log(highscore);
+    for(let i = 0; i < highscore.length; i++) {
+        let outputVal = `Level: ${highscore[i].level} -- Highscore: ${highscore[i].name} -- ${highscore[i].points}`;
+        let newLiElem = document.createElement('li');
+        newLiElem.appendChild(document.createTextNode(outputVal));
+        let ul = document.getElementById("outpScore");
+        ul.appendChild(newLiElem);
+        
+    }
+}
+showHighscore();

@@ -51,11 +51,11 @@ function getData() {
         highscore = JSON.parse(localStorage.getItem("storedHighscore"));
     }else{
         console.log("Noch kein Highscore Array");
-        const veryEasyScore = new Highscore('','veryEasy', 0);
-        const easyScore = new Highscore('','easy', 0);
-        const mediumScore = new Highscore('','medium', 0);
-        const hardScore = new Highscore('','hard', 0);
-        const veryHardScore = new Highscore('','veryHard', 0);
+        const veryEasyScore = new Highscore('Neu','veryEasy', 0);
+        const easyScore = new Highscore('Neu','easy', 0);
+        const mediumScore = new Highscore('Neu','medium', 0);
+        const hardScore = new Highscore('Neu','hard', 0);
+        const veryHardScore = new Highscore('Neu','veryHard', 0);
         highscore.push(veryEasyScore);
         highscore.push(easyScore);
         highscore.push(mediumScore);
@@ -76,16 +76,12 @@ class Highscore {
 
 function checkScore() {
     let foundScore = false;
-    let oldCountdown = 0;
-
-    const oldSre = new Highscore('Mr.Feffehausen von Anhalt', 'veryEasy', 10);
-    highscore.push(oldSre);
 
     for(let i = 0; i < highscore.length; i++) {
         if(highscore[i].points < points && highscore[i].level === degreeOfDifficulty) {
             foundScore = true;
             document.getElementById("output").innerHTML = `Gewonnen und den Highscore geknackt 🥇🎈 Du hast: ${seconds} Sekunden benötigt und ${points} Punkte erhalten`;
-            const newHighscoreName = window.prompt(`Du hast den Highscore "${highscore[i].name}: ${highscore[i].points}" genkackt. Trage Deinen Namen ein:`);
+            const newHighscoreName = window.prompt(`Du hast den Highscore "${highscore[i].name}: ${highscore[i].points}" geknackt. Trage Deinen Namen ein:`);
             highscore[i].name = newHighscoreName;
             highscore[i].level = degreeOfDifficulty;
             highscore[i].points = points;

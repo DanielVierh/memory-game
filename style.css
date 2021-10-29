@@ -129,3 +129,15 @@ h1{
     min-height: 70px;
 }
 
+.container{
+    display: grid;
+    place-content: center;
+    text-align: center;
+}
+
+ul{
+    list-style: none;
+    color: yellow;
+    font-weight: bold;
+    text-align: right;
+}
