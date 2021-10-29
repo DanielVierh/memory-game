@@ -164,13 +164,13 @@ function checkMatch() {
         // Combo
         if(combo == 2) {
             points += 2;
-            document.getElementById("output").innerHTML = points + " Punkte (+5 Punkte 🤩 +2 Zweifach Combo)";
+            document.getElementById("output").innerHTML = points + " Punkte (+5 Punkte 🤩 <br>  +2 Zweifach Combo)";
         }else if(combo == 3) {
             points += 4;
-            document.getElementById("output").innerHTML = points + " Punkte (+5 Punkte 🤩 +3 Dreifach Combo)";
+            document.getElementById("output").innerHTML = points + " Punkte (+5 Punkte 🤩 <br> +3 Dreifach Combo)";
         }else if (combo > 3) {
             points += 6;
-            document.getElementById("output").innerHTML = points + " Punkte (+5 Punkte 🤩 +5 Super Combo)";
+            document.getElementById("output").innerHTML = points + " Punkte (+5 Punkte 🤩 <br> +5 Super Combo)";
         }
         // Disabled etc
         document.getElementById(card1).disabled = true;
