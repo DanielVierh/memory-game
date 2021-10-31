@@ -105,7 +105,7 @@ function showHighscore(){
     }
     console.log(highscore);
     for(let i = 0; i < highscore.length; i++) {
-        let outputVal = `Level: ${highscore[i].level} -- Highscore: ${highscore[i].name} -- ${highscore[i].points}`;
+        let outputVal = `Level: ${highscore[i].level}: ${highscore[i].name}- ${highscore[i].points}`;
         let newLiElem = document.createElement('li');
         newLiElem.appendChild(document.createTextNode(outputVal));
         let ul = document.getElementById("outpScore");
@@ -116,13 +116,20 @@ function showHighscore(){
 showHighscore();
 
 function deleteScore() {
+    const request = window.confirm("Soll die Highscore Liste wirklich zurückgesetzt werden?");
+    if(request) {
+        resetScore();
+    }
+}
+
+function resetScore(){
     highscore = [];
     localStorage.setItem("storedHighscore", JSON.stringify(highscore));
-    const veryEasyScore = new Highscore('Neu','veryEasy', 0);
-    const easyScore = new Highscore('Neu','easy', 0);
-    const mediumScore = new Highscore('Neu','medium', 0);
-    const hardScore = new Highscore('Neu','hard', 0);
-    const veryHardScore = new Highscore('Neu','veryHard', 0);
+    const veryEasyScore = new Highscore('-','veryEasy', 0);
+    const easyScore = new Highscore('-','easy', 0);
+    const mediumScore = new Highscore('-','medium', 0);
+    const hardScore = new Highscore('-','hard', 0);
+    const veryHardScore = new Highscore('-','veryHard', 0);
     highscore.push(veryEasyScore);
     highscore.push(easyScore);
     highscore.push(mediumScore);
