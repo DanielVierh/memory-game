@@ -141,3 +141,12 @@ ul{
     font-weight: bold;
     text-align: right;
 }
+
+
+.normalButton{
+    background-color: rgb(16, 39, 65);
+    color: red;
+    height: 40px;
+    border-radius: 15px;
+    font-size: 20px;
+}

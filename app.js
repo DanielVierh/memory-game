@@ -1,3 +1,12 @@
+let highscore = [];
+
+class Highscore {
+    constructor(name, level, points) {
+        this.name = name;
+        this.level = level;
+        this.points = points;
+    }
+}
 
 function chooseTheme1() {
     save_ThemePackage("pack1");
@@ -87,22 +96,12 @@ function backToManue() {
 }
 
 function showHighscore(){
-    let highscore = [];
+    document.getElementById("outpScore").innerHTML = "";
     if(localStorage.getItem('storedHighscore') != null) {
         highscore = JSON.parse(localStorage.getItem("storedHighscore"));
     }else{
         console.log("Noch kein Highscore Array");
-        const veryEasyScore = new Highscore('Neu','veryEasy', 0);
-        const easyScore = new Highscore('Neu','easy', 0);
-        const mediumScore = new Highscore('Neu','medium', 0);
-        const hardScore = new Highscore('Neu','hard', 0);
-        const veryHardScore = new Highscore('Neu','veryHard', 0);
-        highscore.push(veryEasyScore);
-        highscore.push(easyScore);
-        highscore.push(mediumScore);
-        highscore.push(hardScore);
-        highscore.push(veryHardScore);
-        localStorage.setItem("storedHighscore", JSON.stringify(highscore));
+        deleteScore();
     }
     console.log(highscore);
     for(let i = 0; i < highscore.length; i++) {
@@ -115,3 +114,20 @@ function showHighscore(){
     }
 }
 showHighscore();
+
+function deleteScore() {
+    highscore = [];
+    localStorage.setItem("storedHighscore", JSON.stringify(highscore));
+    const veryEasyScore = new Highscore('Neu','veryEasy', 0);
+    const easyScore = new Highscore('Neu','easy', 0);
+    const mediumScore = new Highscore('Neu','medium', 0);
+    const hardScore = new Highscore('Neu','hard', 0);
+    const veryHardScore = new Highscore('Neu','veryHard', 0);
+    highscore.push(veryEasyScore);
+    highscore.push(easyScore);
+    highscore.push(mediumScore);
+    highscore.push(hardScore);
+    highscore.push(veryHardScore);
+    localStorage.setItem("storedHighscore", JSON.stringify(highscore));
+    showHighscore();
+}
