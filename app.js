@@ -1,5 +1,6 @@
 // let highscore = [];
 let ul = document.getElementById("outpScore");
+
 class Highscore {
     constructor(name, level, points) {
         this.name = name;

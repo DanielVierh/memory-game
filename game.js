@@ -25,14 +25,33 @@ let seconds = 0;
 let averageTime = 100;
 
 
+// #########################################################################
+// Flip-Animation bei Klick auf die Karte
+// #########################################################################
+const flipCards = document.querySelectorAll('.buttonCard');
+flipCards.forEach((flipCard) => {
+    flipCard.addEventListener('click', () => {
+        flipCard.classList.add('active');
+    })
+})
+
+// löscht bei jeder Karte die Klasse active
+function removeActiveClasses() {
+    flipCards.forEach((flipCard) => {
+        flipCard.classList.remove('active');
+    })
+}
+
+// #########################################################################
 // Gespeicherte Werte laden
+// #########################################################################
 function getData() {
     // Theme Package
     if(localStorage.getItem('storedEmojiPack') === null) {
         console.log("Kein  Emojipack");
         emojiPack = "pack1"
     }else {
-        
+
         emojiPack = JSON.parse(localStorage.getItem("storedEmojiPack"));
         console.log("Pack wird geladen", emojiPack);
     }
@@ -42,7 +61,7 @@ function getData() {
         console.log("Kein  Mode");
         degreeOfDifficulty = "medium"
     }else {
-        
+
         degreeOfDifficulty = JSON.parse(localStorage.getItem("storedMode"));
         console.log("Mode wird geladen", degreeOfDifficulty);
     }
@@ -86,11 +105,11 @@ function checkScore() {
             highscore[i].level = degreeOfDifficulty;
             highscore[i].points = points;
             localStorage.setItem("storedHighscore", JSON.stringify(highscore));
-            return            
+            return
         }
     }
     if(foundScore === false) {
-        document.getElementById("output").innerHTML = `Gewonnen 🎈 Du hast: ${seconds} Sekunden benötigt. Du hast ${points} Punkte erhalten`;     
+        document.getElementById("output").innerHTML = `Gewonnen 🎈 Du hast: ${seconds} Sekunden benötigt. Du hast ${points} Punkte erhalten`;
     }
 }
 
@@ -169,37 +188,39 @@ function shuffle(a) {
 
 // Aufdecken
 function toggleCard(id) {
-    if (gameStarted == false && degreeOfDifficulty == "veryHard") {
-        runCountdown();
-        countTime();
-        gameStarted = true;
-    }else if(gameStarted == false) {
-        countTime();
-        gameStarted = true;
-    }
-    toggleAmount ++;
-    if(toggleAmount < 2) {
-        card1 = id;
-        // Hole Wert aus Array Cards
-        let currentEmoji = searchCard(id);
-        emoji1 = currentEmoji;
-        document.getElementById(id).innerText = currentEmoji;
-    }else if(toggleAmount < 3) {
-        if(card1 != id) {
-            card2 = id;
+    setTimeout(() => {
+        if (gameStarted == false && degreeOfDifficulty == "veryHard") {
+            runCountdown();
+            countTime();
+            gameStarted = true;
+        }else if(gameStarted == false) {
+            countTime();
+            gameStarted = true;
+        }
+        toggleAmount ++;
+        if(toggleAmount < 2) {
+            card1 = id;
             // Hole Wert aus Array Cards
             let currentEmoji = searchCard(id);
+            emoji1 = currentEmoji;
             document.getElementById(id).innerText = currentEmoji;
-            emoji2 = currentEmoji;
+        }else if(toggleAmount < 3) {
+            if(card1 != id) {
+                card2 = id;
+                // Hole Wert aus Array Cards
+                let currentEmoji = searchCard(id);
+                document.getElementById(id).innerText = currentEmoji;
+                emoji2 = currentEmoji;
 
-            checkMatch();
+                checkMatch();
+            }else{
+                toggleAmount --;
+            }
         }else{
-            toggleAmount --;
+            // Cover Cards
+            //coverCards();
         }
-    }else{
-        // Cover Cards
-        //coverCards();
-    }
+    }, 400);
 }
 
 // Sucht Emoji und weist diese zu
@@ -266,6 +287,7 @@ function timeframe() {
 
 // Verdecke Karten
 function coverCards() {
+    removeActiveClasses();
     document.getElementById(card1).innerText = "♠️";
     document.getElementById(card2).innerText = "♠️";
     card1 = "";
@@ -289,7 +311,7 @@ function backToManue() {
 
 // Bei Sehr schwer Countdown
 function runCountdown() {
-    
+
         setInterval(() => {
             if (countdown > 0){
                 if(sieg == false){
@@ -304,7 +326,7 @@ function runCountdown() {
                 document.getElementById("countdown").innerHTML = "Game Over";
                 buttonSperren();
             }
-        }, 1000); 
+        }, 1000);
 }
 
 function buttonSperren() {
@@ -333,8 +355,6 @@ function getDate() {
 function addZero(val) {
     if(val < 10) {
         val = `0${val}`;
-    } 
+    }
     return val;
 }
-
-
