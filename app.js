@@ -1,5 +1,5 @@
-let highscore = [];
-
+// let highscore = [];
+let ul = document.getElementById("outpScore");
 class Highscore {
     constructor(name, level, points) {
         this.name = name;
@@ -10,27 +10,27 @@ class Highscore {
 
 function chooseTheme1() {
     save_ThemePackage("pack1");
-    colorizeButton("btn1");    
+    colorizeButton("btn1");
 }
 
 function chooseTheme2() {
     save_ThemePackage("pack2");
-    colorizeButton("btn2");    
+    colorizeButton("btn2");
 }
 
 function chooseTheme3() {
     save_ThemePackage("pack3");
-    colorizeButton("btn3");    
+    colorizeButton("btn3");
 }
 
 function chooseTheme4() {
     save_ThemePackage("pack4");
-    colorizeButton("btn4");    
+    colorizeButton("btn4");
 }
 
 function chooseTheme5() {
     save_ThemePackage("pack5");
-    colorizeButton("btn5");    
+    colorizeButton("btn5");
 }
 
 function colorizeButton(btn){
@@ -96,7 +96,12 @@ function backToManue() {
 }
 
 function showHighscore(){
-    document.getElementById("outpScore").innerHTML = "";
+    try{
+        ul.innerHTML = "";
+    }catch{
+
+    }
+
     if(localStorage.getItem('storedHighscore') != null) {
         highscore = JSON.parse(localStorage.getItem("storedHighscore"));
     }else{
@@ -105,12 +110,15 @@ function showHighscore(){
     }
     console.log(highscore);
     for(let i = 0; i < highscore.length; i++) {
-        let outputVal = `Level: ${highscore[i].level}: ${highscore[i].name}- ${highscore[i].points}`;
-        let newLiElem = document.createElement('li');
-        newLiElem.appendChild(document.createTextNode(outputVal));
-        let ul = document.getElementById("outpScore");
-        ul.appendChild(newLiElem);
-        
+        try{
+            let outputVal = `Level: ${highscore[i].level}: ${highscore[i].name}- ${highscore[i].points}`;
+            let newLiElem = document.createElement('li');
+            newLiElem.appendChild(document.createTextNode(outputVal));
+            ul = document.getElementById("outpScore");
+            ul.appendChild(newLiElem);
+        }catch{
+
+        }
     }
 }
 showHighscore();
