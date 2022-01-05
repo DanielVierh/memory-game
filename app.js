@@ -1,13 +1,4 @@
-// let highscore = [];
-let ul = document.getElementById("outpScore");
 
-class Highscore {
-    constructor(name, level, points) {
-        this.name = name;
-        this.level = level;
-        this.points = points;
-    }
-}
 
 function chooseTheme1() {
     save_ThemePackage("pack1");
@@ -96,54 +87,5 @@ function backToManue() {
     window.location = "index.html"
 }
 
-function showHighscore(){
-    try{
-        ul.innerHTML = "";
-    }catch{
 
-    }
 
-    if(localStorage.getItem('storedHighscore') != null) {
-        highscore = JSON.parse(localStorage.getItem("storedHighscore"));
-    }else{
-        console.log("Noch kein Highscore Array");
-        deleteScore();
-    }
-    console.log(highscore);
-    for(let i = 0; i < highscore.length; i++) {
-        try{
-            let outputVal = `Level: ${highscore[i].level}: ${highscore[i].name}- ${highscore[i].points}`;
-            let newLiElem = document.createElement('li');
-            newLiElem.appendChild(document.createTextNode(outputVal));
-            ul = document.getElementById("outpScore");
-            ul.appendChild(newLiElem);
-        }catch{
-
-        }
-    }
-}
-showHighscore();
-
-function deleteScore() {
-    const request = window.confirm("Soll die Highscore Liste wirklich zurückgesetzt werden?");
-    if(request) {
-        resetScore();
-    }
-}
-
-function resetScore(){
-    highscore = [];
-    localStorage.setItem("storedHighscore", JSON.stringify(highscore));
-    const veryEasyScore = new Highscore('-','veryEasy', 0);
-    const easyScore = new Highscore('-','easy', 0);
-    const mediumScore = new Highscore('-','medium', 0);
-    const hardScore = new Highscore('-','hard', 0);
-    const veryHardScore = new Highscore('-','veryHard', 0);
-    highscore.push(veryEasyScore);
-    highscore.push(easyScore);
-    highscore.push(mediumScore);
-    highscore.push(hardScore);
-    highscore.push(veryHardScore);
-    localStorage.setItem("storedHighscore", JSON.stringify(highscore));
-    showHighscore();
-}

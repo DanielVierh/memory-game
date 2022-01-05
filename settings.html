@@ -1,44 +1,32 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css">
-    
     <title>Memory-Einstellungen</title>
-    <script></script>
 </head>
 
 <body>
-    
-<h1 style="text-align: center;font-size: 60px;">Einstellungen</h1>
-<button class="buttonBackToMenue" onclick="backToManue()">◀ Zurück</button>
+
+    <h1 style="text-align: center;font-size: 60px;">Einstellungen</h1>
+    <button class="button backToMenue" onclick="backToManue()">◀ Zurück</button>
 
 
-<div class="box">
-    <h1 style="color: white;">Theme</h1>
+    <div class="box">
+        <h1 style="color: white;">Theme</h1>
 
-    <div class="themeContainer">
-        <button class="themeButton" id="btn1" onclick="chooseTheme1()">🐠🐙🐢🐳🦈🐬🐚🐡🐊🐋🐟🐸</button>
-        <button class="themeButton" id="btn2" onclick="chooseTheme2()">😃😅😍😴😷😎🤓😱👿👻👽🤖</button>
-        <button class="themeButton" id="btn3" onclick="chooseTheme3()">🦖🦕🐉🐲🐍🦎🐊🐢🌋☄️🦂🦀</button>
-        <button class="themeButton" id="btn4" onclick="chooseTheme4()">🍉🍋🥦🍎🍓🥥🥗🍗🍔🍟🍕🍳</button>
-        <button class="themeButton" id="btn5" onclick="chooseTheme5()">🚗🚕🚑🚒🚛🚓🚜🚁🚢⛵️🚆🛵</button>
+        <div class="themeContainer">
+            <button class="themeButton" id="btn1" onclick="chooseTheme1()">🐠🐙🐢🐳🦈🐬🐚🐡🐊🐋🐟🐸</button>
+            <button class="themeButton" id="btn2" onclick="chooseTheme2()">😃😅😍😴😷😎🤓😱👿👻👽🤖</button>
+            <button class="themeButton" id="btn3" onclick="chooseTheme3()">🦖🦕🐉🐲🐍🦎🐊🐢🌋☄️🦂🦀</button>
+            <button class="themeButton" id="btn4" onclick="chooseTheme4()">🍉🍋🥦🍎🍓🥥🥗🍗🍔🍟🍕🍳</button>
+            <button class="themeButton" id="btn5" onclick="chooseTheme5()">🚗🚕🚑🚒🚛🚓🚜🚁🚢⛵️🚆🛵</button>
+        </div>
+
     </div>
-
-</div>
-<br><br>
-
-<div class="container">
-    <h1>Highscore</h1>
-    <button onclick="deleteScore()" class="normalButton">Liste löschen</button>
-    <br>
-    <ul id="outpScore"></ul>
-</div>
-
-
-
+    <script src="./app.js"></script>
 </body>
-<script src="./app.js"></script>
+
 </html>

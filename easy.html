@@ -1,30 +1,18 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> 
-    <!-- Eigene CSS Styles -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="./style.css">
-    
-    <br><br>
-    <button class="buttonBackToMenue" onclick="backToManue()">◀ Zurück</button>
     <title>Memory-leicht</title>
-    <script></script>
 </head>
-
 <body>
-<h1 style="text-align: center;">Memory (Leicht)</h1>
-<div class="mainContainer">
-    <button class="button Start" onclick="restart()">Neustart</button>
-</div>
-
-<br>
-
-<p id="output">5 Startpunkte </p>
-
-<div class="mainContainer">
-
+    <div class="navContainer">
+        <button class="button backToMenue" onclick="backToManue()">◀ Zurück</button>
+        <button class="button restart" onclick="restart()">Neustart</button>
+    </div>
+    <p id="output">5 Startpunkte </p>
+    <div class="mainContainer">
         <button class="buttonCard" id="card0" onclick="toggleCard(id)">♠️</button>
         <button class="buttonCard" id="card1" onclick="toggleCard(id)">♠️</button>
         <button class="buttonCard" id="card2" onclick="toggleCard(id)">♠️</button>
@@ -37,13 +25,7 @@
         <button class="buttonCard" id="card9" onclick="toggleCard(id)">♠️</button>
         <button class="buttonCard" id="card10" onclick="toggleCard(id)">♠️</button>
         <button class="buttonCard" id="card11" onclick="toggleCard(id)">♠️</button>
-
-</div>
-
-<br><br>
-
+    </div>
+    <script src="./game.js"></script>
 </body>
-<script src="./game.js"></script>
 </html>
-
-<!-- Kommentar -->

@@ -20,9 +20,14 @@ let arrayLength = 0;
 let countdown = 100;
 let gameStarted = false;
 let sieg = false;
-let highscore = [];
 let seconds = 0;
 let averageTime = 100;
+const outputBox = document.getElementById("output");
+
+// #########################################################################
+// Start
+// #########################################################################
+window.onload = init;
 
 
 // #########################################################################
@@ -48,74 +53,28 @@ function removeActiveClasses() {
 function getData() {
     // Theme Package
     if(localStorage.getItem('storedEmojiPack') === null) {
-        console.log("Kein  Emojipack");
+        // console.log("Kein  Emojipack");
         emojiPack = "pack1"
     }else {
 
         emojiPack = JSON.parse(localStorage.getItem("storedEmojiPack"));
-        console.log("Pack wird geladen", emojiPack);
+        // console.log("Pack wird geladen", emojiPack);
     }
 
     //Mode
     if(localStorage.getItem('storedMode') === null) {
-        console.log("Kein  Mode");
+        // console.log("Kein  Mode");
         degreeOfDifficulty = "medium"
     }else {
 
         degreeOfDifficulty = JSON.parse(localStorage.getItem("storedMode"));
-        console.log("Mode wird geladen", degreeOfDifficulty);
+        // console.log("Mode wird geladen", degreeOfDifficulty);
     }
-    // Highscore
-    if(localStorage.getItem('storedHighscore') != null) {
-        highscore = JSON.parse(localStorage.getItem("storedHighscore"));
-    }else{
-        console.log("Noch kein Highscore Array");
-        const veryEasyScore = new Highscore('-','veryEasy', 0);
-        const easyScore = new Highscore('-','easy', 0);
-        const mediumScore = new Highscore('-','medium', 0);
-        const hardScore = new Highscore('-','hard', 0);
-        const veryHardScore = new Highscore('-','veryHard', 0);
-        highscore.push(veryEasyScore);
-        highscore.push(easyScore);
-        highscore.push(mediumScore);
-        highscore.push(hardScore);
-        highscore.push(veryHardScore);
-        localStorage.setItem("storedHighscore", JSON.stringify(highscore));
-        // console.log(highscore);
-    }
-}
 
-class Highscore {
-    constructor(name, level, points) {
-        this.name = name;
-        this.level = level;
-        this.points = points;
-    }
-}
-
-function checkScore() {
-    let foundScore = false;
-
-    for(let i = 0; i < highscore.length; i++) {
-        if(highscore[i].points < points && highscore[i].level === degreeOfDifficulty) {
-            foundScore = true;
-            document.getElementById("output").innerHTML = `Gewonnen und den Highscore geknackt 🥇🎈 Du hast: ${seconds} Sekunden benötigt und ${points} Punkte erhalten`;
-            const newHighscoreName = window.prompt(`Du hast den Highscore "${highscore[i].name}: ${highscore[i].points}" geknackt. Trage Deinen Namen ein:`);
-            highscore[i].name = `${getDate()}- ${newHighscoreName}`;
-            highscore[i].level = degreeOfDifficulty;
-            highscore[i].points = points;
-            localStorage.setItem("storedHighscore", JSON.stringify(highscore));
-            return
-        }
-    }
-    if(foundScore === false) {
-        document.getElementById("output").innerHTML = `Gewonnen 🎈 Du hast: ${seconds} Sekunden benötigt. Du hast ${points} Punkte erhalten`;
-    }
 }
 
 
 
-getData();
 
 function assignPackage() {
     if(emojiPack == "pack1") {
@@ -162,31 +121,41 @@ class Card{
     }
 }
 
-assignPackage();
+// #########################################################################
+// Init Function <<Programmstart>>
+// #########################################################################
+function init () {
+    getData();
+    assignPackage();
+    }
 
+// #########################################################################
 // Den Karten einen Wert zuweisen
+// #########################################################################
 function assignValues() {
     shuffle(emojiArray);
     for (let i = 0; i < arrayLength; i++) {
         let crdID = "card" + i;
         let emj = emojiArray[i];
         cards.push(new Card(crdID,emj));
-        console.log("Karte: ", crdID + " Emoji:", emj);
+        // console.log("Karte: ", crdID + " Emoji:", emj);
     }
 }
 
-
-//Shuffle
-function shuffle(a) {
+// #########################################################################
+//Shuffle Cards
+// #########################################################################
+function shuffle(arr) {
     for (let i = arrayLength - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
+        [arr[i], arr[j]] = [arr[j], arr[i]];
     }
-    return a;
+    return arr;
 }
 
-
+// #########################################################################
 // Aufdecken
+// #########################################################################
 function toggleCard(id) {
     setTimeout(() => {
         if (gameStarted == false && degreeOfDifficulty == "veryHard") {
@@ -223,7 +192,9 @@ function toggleCard(id) {
     }, 400);
 }
 
+// #########################################################################
 // Sucht Emoji und weist diese zu
+// #########################################################################
 function searchCard(cardID) {
     for(let i = 0; i < cards.length; i++) {
         if (cards[i].cardID == cardID) {
@@ -232,23 +203,25 @@ function searchCard(cardID) {
     }
 }
 
-
+// #########################################################################
 // Match checken
+// #########################################################################
 function checkMatch() {
+    // Wenn beide Karten identisch sind 
     if (emoji1 == emoji2) {
         points += 5;
         combo ++;
-        document.getElementById("output").innerHTML = points + " Punkte (+5 Punkte)";
+        outputBox.innerHTML = points + " Punkte (+5 Punkte)";
         // Combo
         if(combo == 2) {
             points += 2;
-            document.getElementById("output").innerHTML = points + " Punkte (+5 Punkte 🤩 <br>  +2 Zweifach Combo)";
+            outputBox.innerHTML = points + " Punkte (+5 Punkte 🤩 <br>  +2 Zweifach Combo)";
         }else if(combo == 3) {
             points += 4;
-            document.getElementById("output").innerHTML = points + " Punkte (+5 Punkte 🤩 <br> +3 Dreifach Combo)";
+            outputBox.innerHTML = points + " Punkte (+5 Punkte 🤩 <br> +3 Dreifach Combo)";
         }else if (combo > 3) {
             points += 6;
-            document.getElementById("output").innerHTML = points + " Punkte (+5 Punkte 🤩 <br> +5 Super Combo)";
+            outputBox.innerHTML = points + " Punkte (+5 Punkte 🤩 <br> +5 Super Combo)";
         }
         // Disabled etc
         document.getElementById(card1).disabled = true;
@@ -260,24 +233,25 @@ function checkMatch() {
         emoji1 = "";
         emoji2 = "";
         if(totalDiscovered == valuePairs) {
+            // Spiel gewonnen
             sieg = true;
             const additionalPoints = averageTime - seconds;
             points += additionalPoints;
-            checkScore();
+            // TODO Siegeslabel
+            // ########
         }
     }else {
         points -= 2;
         if(points < 0) {
             points = 0;
-            //if(degreeOfDifficulty == "veryHard") {
-                countdown = 0;
-            // }
+            countdown = 0;
         }
-        document.getElementById("output").innerHTML = points + " Punkte (-2 Punkte)";
+        outputBox.innerHTML = points + " Punkte (-2 Punkte)";
         combo = 0;
         timeframe();
     }
 }
+
 
 function timeframe() {
     setTimeout(() => {
@@ -297,19 +271,23 @@ function coverCards() {
     toggleAmount = 0;
 }
 
-
+// #########################################################################
 // Neustart
+// #########################################################################
 function restart() {
     location.reload();
 }
 
+// #########################################################################
 // Zurück zum Menü
+// #########################################################################
 function backToManue() {
     window.location = "index.html"
 }
 
-
+// #########################################################################
 // Bei Sehr schwer Countdown
+// #########################################################################
 function runCountdown() {
 
         setInterval(() => {
@@ -329,6 +307,9 @@ function runCountdown() {
         }, 1000);
 }
 
+// #########################################################################
+// Wenn Spiel beendet, Button sperren
+// #########################################################################
 function buttonSperren() {
     for (let i = 0; i < arrayLength; i++) {
         document.getElementById("card" + i).disabled = true;
