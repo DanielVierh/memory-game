@@ -36,9 +36,9 @@ h1{
 .buttonCard{
     background-color: rgba(24, 29, 24, 0.568);
     color: aqua;
-    width: 90px;
-    height: 90px;
-    margin: 15px;
+    width: 100px;
+    height: 180px;
+    margin: 5px;
     font-size: 50px;
     border-radius: 12px;
     box-shadow: 5px 5px 15px rgba(11, 250, 11, 0.397);
