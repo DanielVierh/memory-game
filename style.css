@@ -14,7 +14,10 @@ body{
 .mainContainer{
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
+    max-width: 700px;
+    margin: auto;
 }
 
 .box{
@@ -37,9 +40,9 @@ h1{
     background-color: rgba(24, 29, 24, 0.568);
     color: aqua;
     width: 100px;
-    height: 180px;
+    height: 150px;
     margin: 5px;
-    font-size: 50px;
+    font-size: 60px;
     border-radius: 12px;
     box-shadow: 5px 5px 15px rgba(11, 250, 11, 0.397);
     border: 3px solid rgba(13, 107, 150, 0.699);
@@ -99,8 +102,8 @@ h1{
     .buttonCard{
         background-color: rgba(24, 29, 24, 0.568);
         color: aqua;
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
         margin: 5px;
         font-size: 35px;
         border-radius: 12px;
@@ -108,13 +111,23 @@ h1{
         border: 3px solid rgba(13, 107, 150, 0.699);
         padding: 0;
     }
+
+    .mainContainer{
+        max-width: 300px;
+    }
+
+    #countdown.timerLabel{
+        margin: 0;
+        font-size:1rem;
+    }
 }
 
 .timerLabel{
     text-align: center;
-    font-size: 28px;
+    font-size: 3rem;
     font-weight: bold;
     color: yellow;
+    margin: 20px;
 }
 
 
