@@ -86,6 +86,3 @@ function save_Mode(mode) {
 function backToManue() {
     window.location = "index.html"
 }
-
-
-

@@ -53,22 +53,18 @@ function removeActiveClasses() {
 function getData() {
     // Theme Package
     if(localStorage.getItem('storedEmojiPack') === null) {
-        // console.log("Kein  Emojipack");
         emojiPack = "pack1"
     }else {
 
         emojiPack = JSON.parse(localStorage.getItem("storedEmojiPack"));
-        // console.log("Pack wird geladen", emojiPack);
     }
 
     //Mode
     if(localStorage.getItem('storedMode') === null) {
-        // console.log("Kein  Mode");
         degreeOfDifficulty = "medium"
     }else {
 
         degreeOfDifficulty = JSON.parse(localStorage.getItem("storedMode"));
-        // console.log("Mode wird geladen", degreeOfDifficulty);
     }
 
 }
@@ -138,7 +134,6 @@ function assignValues() {
         let crdID = "card" + i;
         let emj = emojiArray[i];
         cards.push(new Card(crdID,emj));
-        // console.log("Karte: ", crdID + " Emoji:", emj);
     }
 }
 
@@ -207,7 +202,7 @@ function searchCard(cardID) {
 // Match checken
 // #########################################################################
 function checkMatch() {
-    // Wenn beide Karten identisch sind 
+    // Wenn beide Karten identisch sind
     if (emoji1 == emoji2) {
         points += 5;
         combo ++;
@@ -238,7 +233,8 @@ function checkMatch() {
             const additionalPoints = averageTime - seconds;
             points += additionalPoints;
             // TODO Siegeslabel
-            // ########
+            outputBox.innerHTML = `Glückwunsch,\n du hast ${points} Punkte erhalten.`
+            createNotification('Gewonnen 😀😀😀 ' ,'success')
         }
     }else {
         points -= 2;
@@ -292,7 +288,7 @@ function runCountdown() {
 
         setInterval(() => {
             if (countdown > 0){
-                if(sieg == false){
+                if(sieg === false){
                     countdown --;
                     document.getElementById("countdown").innerHTML = countdown + " Sekunden";
                 }else{
@@ -301,7 +297,7 @@ function runCountdown() {
                 }
 
             }else {
-                document.getElementById("countdown").innerHTML = "Game Over";
+                createNotification('Game Over 😔','alert')
                 buttonSperren();
             }
         }, 1000);
@@ -318,7 +314,7 @@ function buttonSperren() {
 
 function countTime() {
     setInterval(() => {
-        if(sieg == false){
+        if(sieg === false){
             seconds++;
         }
     }, 1000);
@@ -339,3 +335,27 @@ function addZero(val) {
     }
     return val;
 }
+
+//#########################################################################
+// Toast Notification
+//#########################################################################
+const toasts = document.getElementById('toasts');
+// Toast Notification
+function createNotification(message, messageType) {
+    // Erstelle Div
+    const notifi = document.createElement('div');
+    // Füge Klasse hinzu
+    notifi.classList.add('toast'); // Messagebox
+    notifi.classList.add(messageType); // Messagetypes: alert, info, modal, success
+    // Textmessage hinzufügen
+    notifi.innerText = message;
+    // Dem Toastcontainer das erstelle Toast hinzufügen
+    toasts.appendChild(notifi);
+
+    // Nachricht nach festgelegter Zeit wieder entfernen
+    setTimeout(() => {
+        notifi.remove();
+    }, 10000);
+}
+
+createNotification('Hallo! \n Los gehts 😀', 'info');

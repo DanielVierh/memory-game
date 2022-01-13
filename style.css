@@ -97,7 +97,7 @@ h1{
     background-color: rgba(255, 217, 0, 0.7);
 }
 
-
+/* ############################################### */
 @media screen and (max-width: 700px) {
     .buttonCard{
         background-color: rgba(24, 29, 24, 0.568);
@@ -118,9 +118,10 @@ h1{
 
     #countdown.timerLabel{
         margin: 0;
-        font-size:1rem;
+        font-size:1.3rem;
     }
 }
+/* ############################################### */
 
 .timerLabel{
     text-align: center;
@@ -171,4 +172,54 @@ h1{
     height: 40px;
     border-radius: 15px;
     font-size: 20px;
+}
+
+
+
+/* ############################################### */
+/* Toastnotification */
+
+#toasts{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    border-radius: 15px;
+    max-height: 70px;
+    overflow-y: hidden;
+    transition: transform 0.4s ease;
+}
+
+
+.toast{
+    border-radius:  20px 20px 0 20px ;
+    padding: 1rem 2rem;
+    margin: .5rem;
+    font-weight: bold;
+    opacity: 1;
+}
+
+
+.toast.info{
+    background-color: lightblue;
+    color: black;
+}
+
+
+.toast.modal{
+    background-color: white;
+    color: black;
+}
+
+
+.toast.success{
+    background-color: lightgreen;
+    color: black;
+}
+
+.toast.alert{
+    background-color: rgb(105, 6, 6);
+    color: white;
 }
