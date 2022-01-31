@@ -153,18 +153,21 @@ function shuffle(arr) {
 // #########################################################################
 function toggleCard(id) {
     setTimeout(() => {
+        // ? Countdown starten & Spiel starten bei Hard-Mode
         if (gameStarted == false && degreeOfDifficulty == "veryHard") {
             runCountdown();
             countTime();
             gameStarted = true;
+            // ? Countdown starten bei allen anderen Schwierigkeitsstufen
         }else if(gameStarted == false) {
             countTime();
             gameStarted = true;
         }
+        // ? Aufgedeckte Karten werden gezählt.
         toggleAmount ++;
         if(toggleAmount < 2) {
             card1 = id;
-            // Hole Wert aus Array Cards
+            // ? Hole Wert aus Array Cards
             let currentEmoji = searchCard(id);
             emoji1 = currentEmoji;
             document.getElementById(id).innerText = currentEmoji;
@@ -175,7 +178,6 @@ function toggleCard(id) {
                 let currentEmoji = searchCard(id);
                 document.getElementById(id).innerText = currentEmoji;
                 emoji2 = currentEmoji;
-
                 checkMatch();
             }else{
                 toggleAmount --;
@@ -184,7 +186,8 @@ function toggleCard(id) {
             // Cover Cards
             //coverCards();
         }
-    }, 400);
+
+    }, 200);
 }
 
 // #########################################################################
@@ -203,10 +206,11 @@ function searchCard(cardID) {
 // #########################################################################
 function checkMatch() {
     // Wenn beide Karten identisch sind
-    if (emoji1 == emoji2) {
+    if (emoji1 === emoji2) {
         points += 5;
         combo ++;
         outputBox.innerHTML = points + " Punkte (+5 Punkte)";
+        animateRightCard();
         // Combo
         if(combo == 2) {
             points += 2;
@@ -232,7 +236,6 @@ function checkMatch() {
             sieg = true;
             const additionalPoints = averageTime - seconds;
             points += additionalPoints;
-            // TODO Siegeslabel
             outputBox.innerHTML = `Glückwunsch,\n du hast ${points} Punkte erhalten.`
             createNotification('Gewonnen 😀😀😀 ' ,'success')
         }
@@ -246,6 +249,14 @@ function checkMatch() {
         combo = 0;
         timeframe();
     }
+}
+
+// Markiert das gefundene Pärchen grün und entfernt die Active Klasse
+function animateRightCard() {
+    document.getElementById(card1).classList.add("right");
+    document.getElementById(card1).classList.remove('active');
+    document.getElementById(card2).classList.add("right");
+    document.getElementById(card2).classList.remove('active');
 }
 
 
