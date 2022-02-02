@@ -261,7 +261,7 @@ function checkMatch() {
             sieg = true;
             const additionalPoints = averageTime - seconds;
             points += additionalPoints;
-            outputBox.innerHTML = `Glückwunsch,\n du hast ${points} Punkte erhalten.`
+            outputBox.innerHTML = `Gewonnen 🥳🥳🥳 \n Du hast ${points} Punkte erhalten.`
             createNotification('Gewonnen 😀😀😀 ' ,'success')
         }
     }else {

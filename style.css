@@ -44,10 +44,11 @@ h1{
     margin: 5px;
     font-size: 60px;
     border-radius: 12px;
-    box-shadow: 2px 2px 15px black;
-    border: 3px solid rgba(13, 107, 150, 0.699);
+    box-shadow: 2px 2px 15px black, inset 3px 0 4px white;
+    border: 2px solid rgba(255, 255, 255, 0.603);
     padding: 0;
     transition: 0.3s ease;
+    
 }
 
 .buttonCard.active{
@@ -57,7 +58,7 @@ h1{
 
 .buttonCard.right{
     background-color: rgb(48, 219, 48);
-    box-shadow: 0 0 25px lightgreen;
+    box-shadow: 0 0 25px lightgreen, inset 3px 0 6px white;
 }
 
 .buttonMode{
@@ -106,14 +107,14 @@ h1{
 @media screen and (max-width: 700px) {
     .buttonCard{
         background-color: rgba(24, 29, 24, 0.568);
-        color: aqua;
+        /* color: aqua; */
         width: 60px;
         height: 60px;
         margin: 5px;
         font-size: 35px;
         border-radius: 12px;
-        box-shadow: 5px 5px 15px rgba(11, 250, 11, 0.397);
-        border: 3px solid rgba(13, 107, 150, 0.699);
+        /* box-shadow: 5px 5px 15px rgba(11, 250, 11, 0.397); */
+        /* border: 3px solid rgba(13, 107, 150, 0.699); */
         padding: 0;
     }
 
