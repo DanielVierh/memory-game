@@ -23,6 +23,7 @@ let sieg = false;
 let seconds = 0;
 let averageTime = 100;
 const outputBox = document.getElementById("output");
+let showEmojis = true;
 
 // #########################################################################
 // Start
@@ -55,7 +56,6 @@ function getData() {
     if(localStorage.getItem('storedEmojiPack') === null) {
         emojiPack = "pack1"
     }else {
-
         emojiPack = JSON.parse(localStorage.getItem("storedEmojiPack"));
     }
 
@@ -63,10 +63,15 @@ function getData() {
     if(localStorage.getItem('storedMode') === null) {
         degreeOfDifficulty = "medium"
     }else {
-
         degreeOfDifficulty = JSON.parse(localStorage.getItem("storedMode"));
     }
 
+    // Show Emojis 
+    if(localStorage.getItem('storedShowEmojiVal') === null) {
+        showEmojis = true;
+    }else {
+        showEmojis = JSON.parse(localStorage.getItem("storedShowEmojiVal"));
+    }
 }
 
 
@@ -135,6 +140,7 @@ function assignValues() {
         let emj = emojiArray[i];
         cards.push(new Card(crdID,emj));
     }
+    showAllCards();
 }
 
 // #########################################################################
@@ -147,6 +153,26 @@ function shuffle(arr) {
     }
     return arr;
 }
+
+// #########################################################################
+// Karten am Anfang kurz zeigen
+// #########################################################################
+function showAllCards() {
+    if(showEmojis === true){
+        disableButtons();
+        for(let i = 0; i< arrayLength; i++){
+            document.getElementById(`card${i}`).innerText = cards[i].emoji;
+        }
+        setTimeout(() => {
+            for(let i = 0; i< arrayLength; i++){
+                document.getElementById(`card${i}`).innerText = "♠️";
+            }
+            enableButtons();
+        }, 5000);
+    }
+}
+
+
 
 // #########################################################################
 // Aufdecken
@@ -186,7 +212,6 @@ function toggleCard(id) {
             // Cover Cards
             //coverCards();
         }
-
     }, 200);
 }
 
@@ -309,7 +334,7 @@ function runCountdown() {
 
             }else {
                 createNotification('Game Over 😔','alert')
-                buttonSperren();
+                disableButtons();
             }
         }, 1000);
 }
@@ -317,9 +342,15 @@ function runCountdown() {
 // #########################################################################
 // Wenn Spiel beendet, Button sperren
 // #########################################################################
-function buttonSperren() {
+function disableButtons() {
     for (let i = 0; i < arrayLength; i++) {
         document.getElementById("card" + i).disabled = true;
+    }
+}
+
+function enableButtons() {
+    for (let i = 0; i < arrayLength; i++) {
+        document.getElementById("card" + i).disabled = false;
     }
 }
 

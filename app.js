@@ -1,3 +1,39 @@
+let showEmojis = true;
+const checkboxShowEmojis = document.getElementById("showEmojis");
+
+if(checkboxShowEmojis){
+    checkboxShowEmojis.addEventListener("change", ()=>{
+        if(checkboxShowEmojis.checked === true) {
+            showEmojis = true;
+            
+        }else{
+            showEmojis = false;
+        }
+        localStorage.setItem("storedShowEmojiVal", JSON.stringify(showEmojis));
+    });
+}
+
+
+// Load
+window.onload = init;
+
+function init() {
+    loadStuff();
+}
+
+function loadStuff() {
+    if(localStorage.getItem('storedShowEmojiVal') === null) {
+        showEmojis = true;
+        localStorage.setItem("storedShowEmojiVal", JSON.stringify(showEmojis));
+    }else {
+        showEmojis = JSON.parse(localStorage.getItem("storedShowEmojiVal"));
+        try {
+           checkboxShowEmojis.checked = showEmojis; 
+        } catch (error) {
+            
+        }
+    }
+}
 
 
 function chooseTheme1() {
@@ -73,13 +109,13 @@ function gotoSettings() {
 // Theme
 function save_ThemePackage(theme) {
     localStorage.setItem("storedEmojiPack", JSON.stringify(theme));
-    console.log("Package gespeichert", theme);
 }
 
 function save_Mode(mode) {
     localStorage.setItem("storedMode", JSON.stringify(mode));
-    console.log("Mode gespeichert", mode);
 }
+
+
 
 
 // Zurück zum Menü
