@@ -230,23 +230,28 @@ function searchCard(cardID) {
 // Match checken
 // #########################################################################
 function checkMatch() {
+    let newPoints = 0;
     // Wenn beide Karten identisch sind
     if (emoji1 === emoji2) {
         points += 5;
+        newPoints += 5;
         combo ++;
         outputBox.innerHTML = points + " Punkte (+5 Punkte)";
-        animateRightCard();
         // Combo
         if(combo == 2) {
             points += 2;
+            newPoints += 2;
             outputBox.innerHTML = points + " Punkte (+5 Punkte 🤩 <br>  +2 Zweifach Combo)";
         }else if(combo == 3) {
             points += 4;
+            newPoints += 4;
             outputBox.innerHTML = points + " Punkte (+5 Punkte 🤩 <br> +3 Dreifach Combo)";
         }else if (combo > 3) {
             points += 6;
+            newPoints += 6;
             outputBox.innerHTML = points + " Punkte (+5 Punkte 🤩 <br> +5 Super Combo)";
         }
+        animateRightCard(newPoints);
         // Disabled etc
         document.getElementById(card1).disabled = true;
         document.getElementById(card2).disabled = true;
@@ -277,11 +282,18 @@ function checkMatch() {
 }
 
 // Markiert das gefundene Pärchen grün und entfernt die Active Klasse
-function animateRightCard() {
+// Löst die Pinktestand Animation aus
+function animateRightCard(newPoints) {
     document.getElementById(card1).classList.add("right");
     document.getElementById(card1).classList.remove('active');
     document.getElementById(card2).classList.add("right");
     document.getElementById(card2).classList.remove('active');
+    const animatedPointLabel = document.getElementById("frontLabel");
+    animatedPointLabel.innerHTML = `+${newPoints} Punkte`;
+    animatedPointLabel.classList.add("active");
+    setTimeout(() => {
+        animatedPointLabel.classList.remove("active");
+    }, 2300);
 }
 
 
