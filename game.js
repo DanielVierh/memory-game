@@ -24,6 +24,7 @@ let seconds = 0;
 let averageTime = 100;
 const outputBox = document.getElementById("output");
 let showEmojis = true;
+let life = 5;
 
 // #########################################################################
 // Start
@@ -158,17 +159,28 @@ function shuffle(arr) {
 // Karten am Anfang kurz zeigen
 // #########################################################################
 function showAllCards() {
+    const seconds_show_length = 30;
+    let counter = seconds_show_length;
     if(showEmojis === true){
         disableButtons();
         for(let i = 0; i< arrayLength; i++){
             document.getElementById(`card${i}`).innerText = cards[i].emoji;
         }
+
+        setInterval(() => {
+            if(counter >0) {
+                counter--;
+                createNotification(`Noch ${counter} Sekunden`, 'info', 1000);
+            }
+        }, 1000);
+
         setTimeout(() => {
             for(let i = 0; i< arrayLength; i++){
                 document.getElementById(`card${i}`).innerText = "♠️";
             }
             enableButtons();
-        }, 5000);
+            createNotification('Let´s go', 'info', 3000)
+        }, (seconds_show_length * 1000));
     }
 }
 
@@ -262,17 +274,28 @@ function checkMatch() {
             const additionalPoints = averageTime - seconds;
             points += additionalPoints;
             outputBox.innerHTML = `Gewonnen 🥳🥳🥳 \n Du hast ${points} Punkte erhalten.`
-            createNotification('Gewonnen 😀😀😀 ' ,'success')
+            createNotification('Gewonnen 😀😀😀 ' ,'success', 10000)
         }
     }else {
-        points -= 2;
-        if(points < 0) {
-            points = 0;
-            countdown = 0;
+        if(showEmojis === true){
+            life--;
+            timeframe();
+            createNotification(`${life}/5 Leben`,'alert', 3000)
+            if(life === 0) {
+                createNotification('Game Over 😔','alert', 10000)
+                disableButtons();
+            }
+        }else {
+            points -= 2;
+            if(points < 0) {
+                points = 0;
+                countdown = 0;
+            }
+            outputBox.innerHTML = points + " Punkte (-2 Punkte)";
+            combo = 0;
+            timeframe();
         }
-        outputBox.innerHTML = points + " Punkte (-2 Punkte)";
-        combo = 0;
-        timeframe();
+
     }
 }
 
@@ -333,7 +356,7 @@ function runCountdown() {
                 }
 
             }else {
-                createNotification('Game Over 😔','alert')
+                createNotification('Game Over 😔','alert', 10000)
                 disableButtons();
             }
         }, 1000);
@@ -383,7 +406,7 @@ function addZero(val) {
 //#########################################################################
 const toasts = document.getElementById('toasts');
 // Toast Notification
-function createNotification(message, messageType) {
+function createNotification(message, messageType, show_time) {
     // Erstelle Div
     const notifi = document.createElement('div');
     // Füge Klasse hinzu
@@ -397,7 +420,6 @@ function createNotification(message, messageType) {
     // Nachricht nach festgelegter Zeit wieder entfernen
     setTimeout(() => {
         notifi.remove();
-    }, 10000);
+    }, show_time);
 }
 
-createNotification('Hallo! \n Los gehts 😀', 'info');

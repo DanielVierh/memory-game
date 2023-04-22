@@ -229,3 +229,23 @@ h1{
     background-color: rgb(105, 6, 6);
     color: white;
 }
+
+
+#showEmojis {
+    margin: 20px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+}
+  
+
+#showEmojis::after {
+    content: 'Zeige Emojis zu Beginn 30 Sekunden lang';
+    position: absolute;
+    left: 30px;
+    color: white;
+    width: 120px;
+    top: -15px;
+    font-size: 1.1em;
+    letter-spacing: 1.4px;
+}
