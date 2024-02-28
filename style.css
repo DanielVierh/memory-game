@@ -145,12 +145,13 @@ h1{
 }
 
 .themeButton{
-    min-width: 60%;
+    min-width: 30%;
     height: 130px;
     background-color: rgba(0, 0, 0, 0.651);
     font-size: 30px;
     border-radius: 12px;
     margin: 15px;
+    cursor: pointer;
 }
 
 #output{
