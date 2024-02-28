@@ -148,10 +148,13 @@ h1{
     min-width: 30%;
     height: 130px;
     background-color: rgba(0, 0, 0, 0.651);
-    font-size: 30px;
+    font-size: clamp(12px, 2vw + .5rem, 40px);
     border-radius: 12px;
-    margin: 15px;
+    margin: 15px 5px;
     cursor: pointer;
+    text-align: center;
+    padding: 0 3%;
+    letter-spacing: 8px;
 }
 
 #output{
