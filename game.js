@@ -439,15 +439,15 @@ if(canvas) {
 }
 
 
-//* Klasse
+//* class
 class Particle {
     constructor(color) {
         this.color = color;
         this.x = Math.random() * canvas.width;
         this.y =  0;
         this.size = Math.random() * 5 + 1;
-        this.speedX = Math.random() * 3 - 1.5;
-        this.speedY = Math.random() * 3 - 1.5;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 2 - 0.5;
     }
 
     update() {
@@ -501,5 +501,6 @@ function handleParticles() {
     }
 }
 
-show_confetti_modal();
-trigger_confetti();
+//* Test
+// show_confetti_modal();
+// trigger_confetti();
