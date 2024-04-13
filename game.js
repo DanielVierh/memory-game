@@ -275,6 +275,8 @@ function checkMatch() {
             points += additionalPoints;
             outputBox.innerHTML = `Gewonnen 🥳🥳🥳 \n Du hast ${points} Punkte erhalten.`
             createNotification('Gewonnen 😀😀😀 ' ,'success', 10000)
+            show_confetti_modal();
+            trigger_confetti();
         }
     }else {
         if(showEmojis === true){
@@ -423,3 +425,81 @@ function createNotification(message, messageType, show_time) {
     }, show_time);
 }
 
+//* #########################################################################
+//* Modal for confetti
+//* #########################################################################
+
+const canvas = document.querySelector('.confetti-modal');
+let canvas_is_visible = false;
+let particleArray = [];
+let ctx;
+
+if(canvas) {
+    ctx = canvas.getContext('2d');
+}
+
+
+//* Klasse
+class Particle {
+    constructor(color) {
+        this.color = color;
+        this.x = Math.random() * canvas.width;
+        this.y =  0;
+        this.size = Math.random() * 5 + 1;
+        this.speedX = Math.random() * 3 - 1.5;
+        this.speedY = Math.random() * 3 - 1.5;
+    }
+
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+    }
+
+    draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 1.2);
+        ctx.fill();
+    }
+}
+
+function show_confetti_modal() {
+    if(!canvas_is_visible) {
+        canvas.classList.add('active');
+        canvas_is_visible = true;
+    }else {
+        canvas.classList.remove('active');
+        canvas_is_visible = false;
+    }
+}
+
+function trigger_confetti() {
+    const colors = ['red', 'green', 'yellow', 'blue', 'lightgreen'];
+    for(let i = 0; i < 700; i++) {
+        const randomInt = parseInt(Math.random() * colors.length);
+        particleArray.push(new Particle(colors[randomInt]))
+    }
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    handleParticles();
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+function handleParticles() {
+    for(let i = 0; i < particleArray.length; i++) {
+        particleArray[i].update();
+        particleArray[i].draw();
+
+        if(particleArray[i].y >= canvas.height || particleArray[i].y <= 0 || particleArray[i].x >= canvas.width || particleArray[i].x <= 0){
+            particleArray.splice(i, 1);
+            i--;
+        }
+    }
+}
+
+show_confetti_modal();
+trigger_confetti();
