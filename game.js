@@ -432,11 +432,15 @@ function createNotification(message, messageType, show_time) {
 const canvas = document.querySelector('.confetti-modal');
 let canvas_is_visible = false;
 let particleArray = [];
-let ctx;
+let ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-if(canvas) {
-    ctx = canvas.getContext('2d');
-}
+
+window.addEventListener('resize', ()=> {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
 
 
 //* class
@@ -445,9 +449,9 @@ class Particle {
         this.color = color;
         this.x = Math.random() * canvas.width;
         this.y =  0;
-        this.size = Math.random() * 5 + 1;
+        this.size = Math.random() * 7 + 1;
         this.speedX = Math.random() * 1 - 0.5;
-        this.speedY = Math.random() * 2 - 0.5;
+        this.speedY = Math.random() * 3 - 0.9;
     }
 
     update() {
@@ -458,7 +462,7 @@ class Particle {
     draw() {
         ctx.fillStyle = this.color;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 1.2);
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * Math.random() * 3);
         ctx.fill();
     }
 }
@@ -475,7 +479,7 @@ function show_confetti_modal() {
 
 function trigger_confetti() {
     const colors = ['red', 'green', 'yellow', 'blue', 'lightgreen'];
-    for(let i = 0; i < 700; i++) {
+    for(let i = 0; i < 1000; i++) {
         const randomInt = parseInt(Math.random() * colors.length);
         particleArray.push(new Particle(colors[randomInt]))
     }
@@ -502,5 +506,5 @@ function handleParticles() {
 }
 
 //* Test
-// show_confetti_modal();
-// trigger_confetti();
+show_confetti_modal();
+trigger_confetti();
