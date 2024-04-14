@@ -506,5 +506,5 @@ function handleParticles() {
 }
 
 //* Test
-show_confetti_modal();
-trigger_confetti();
+// show_confetti_modal();
+// trigger_confetti();
